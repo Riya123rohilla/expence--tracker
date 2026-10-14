@@ -201,3 +201,4 @@ class ExpenseService:
         ensure_csv_initialized(self.file_path)
         with open(self.file_path, mode="r", newline="", encoding="utf-8") as f:
             return f.read()
+

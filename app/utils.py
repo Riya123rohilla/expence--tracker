@@ -52,3 +52,4 @@ def ensure_csv_initialized(file_path: Path) -> None:
         with open(file_path, mode="w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(CSV_FIELDNAMES)
+

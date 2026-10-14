@@ -171,3 +171,4 @@ def get_statistics_report(file_path: Optional[Path] = None) -> StatisticsRespons
         expense_count=expense_count,
         category_breakdown=category_breakdown,
     )
+

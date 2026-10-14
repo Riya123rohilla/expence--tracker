@@ -1,8 +1,8 @@
 """Pydantic data models and schemas for request validation and response formatting."""
 
-from datetime import date
+import datetime
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.config import VALID_CATEGORIES
 
@@ -27,7 +27,7 @@ class ExpenseBase(BaseModel):
         description=f"Expense category. Suggested: {', '.join(VALID_CATEGORIES)}.",
         examples=["Food"],
     )
-    date: date = Field(
+    date: datetime.date = Field(
         ...,
         description="Date when the expense occurred in YYYY-MM-DD format.",
         examples=["2026-10-14"],
@@ -85,7 +85,7 @@ class ExpenseUpdate(BaseModel):
         description="Updated category.",
         examples=["Food"],
     )
-    date: Optional[date] = Field(
+    date: Optional[datetime.date] = Field(
         None,
         description="Updated expense date in YYYY-MM-DD format.",
         examples=["2026-10-15"],
@@ -124,9 +124,7 @@ class ExpenseUpdate(BaseModel):
 class ExpenseResponse(ExpenseBase):
     """Schema for expense responses returned to the client."""
     id: int = Field(..., description="Unique integer identifier of the expense.", examples=[1])
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PaginatedExpenseResponse(BaseModel):

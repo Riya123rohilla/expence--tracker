@@ -93,7 +93,7 @@ def list_expenses(
     start_date: Optional[date] = Query(None, description="Filter from this date (YYYY-MM-DD)."),
     end_date: Optional[date] = Query(None, description="Filter up to this date (YYYY-MM-DD)."),
     sort_by: str = Query("date", description=f"Field to sort by: {', '.join(VALID_SORT_FIELDS)}."),
-    order: str = Query("desc", regex="^(asc|desc)$", description="Sort order: 'asc' or 'desc'."),
+    order: str = Query("desc", pattern="^(asc|desc)$", description="Sort order: 'asc' or 'desc'."),
     page: int = Query(1, ge=1, description="Page number (1-indexed)."),
     limit: int = Query(10, ge=1, le=100, description="Items per page (max 100)."),
     service: ExpenseService = Depends(get_service),
